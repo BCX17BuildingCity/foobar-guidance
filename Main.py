@@ -67,22 +67,30 @@ def value(Master,times):
                 a-=24
             x.append(a)
         True_times.append(x)
-
-
-
-
-    #True_times is an array
-
-
-
-
+    Value=[]
+    Maximum_times=[]
+    for i in True_times:
+        x=i[len(i)-1]-i[0]
+        if x<0:
+            x+=24
+        Maximum_times.append(x)
+    Value=[]
+    for q in range(len(Master)):
+        x=[]
+        for i in range(1,len(Master[q])):
+            x.append(Master[q][i].c(True_times[q][i]))
+        Value.append(sum(x))
+    a=1
+    for q in range(len(Value)):
+        Value[q]=[q,a*Value[q]+Maximum_times[q]]
+    return Value
 
 #Sites for now hard coded------------------------------------------------------------------------------------------
 Me=Person()
 Brandenburger_Tor=Site()
 Reichstag=Site()
 Mustafas_Gemuese_Kebab=Site()
-Me.Wishlist=[Reichstag, Brandenburger_Tor, Mustafas_Gemuese_Kebab]
+Me.Wishlist=[Reichstag, Mustafas_Gemuese_Kebab, Brandenburger_Tor]
 #hardcoding names--------------------------------------------------------------------------------------------------
 Brandenburger_Tor.name='Brandenburger_Tor'
 Mustafas_Gemuese_Kebab.name='Mustafas_Gemuese_Kebab'
@@ -113,7 +121,11 @@ for i in range(len(Master)):
     Master[i].insert(0,Me)
     Path.append([Names,pathtime(Master[i])])                            #Path should in the end contain all time steps
 times=Time(Master,Path)
-
-print('printing times: ',times)
-
-value(Master,times)
+Value=value(Master,times)
+Bestfit=0
+for i in range(1,len(Value)):   #lol that time safe :o <3
+    if Value[i][1]<Value[Bestfit][1]:
+        Bestfit=i
+print(Master[Bestfit])
+for i in range(1,len(Master[Bestfit])):
+    print(Master[Bestfit][i].name)
