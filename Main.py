@@ -37,14 +37,25 @@ def pathtime(path):
         time.append(Travel_time(path[i].location,path[i+1].location))
     return time
 #math functions should in a actual product be created using at least taylor and machine learning
-def c2(x): return 0.5*cos(pi*x/12)+0.5
+def c2(x): return 0.5*cos(pi+x/12)+0.5
 def c(x):
-    if 7<=x and x<22:
+    if 7<=x and x<16:
         return 2*(x-7)/18
-    if 16<=x and x<=22:
-        return 3*(x-22)/18
+    if 16<=x and x<=35/2:
+        return 1
+    if 25/2<x and x<22:
+        return -4*(x-22)/18
     else:
         return 10000000
+def c3(x):
+        if 7<=x and x<16:
+            return 3*(x-7)/18
+        if 16<=x and x<=22:
+            return 2*(x-22)/18
+        if 22<x and x<=27:
+            return 0.5
+        else:
+            return 10000000
 def Time(Master,Path):
     Time=[]
     for y in range(len(Path)):
@@ -80,7 +91,7 @@ def value(Master,times):
         for i in range(1,len(Master[q])):
             x.append(Master[q][i].c(True_times[q][i]))
         Value.append(sum(x))
-    a=1
+    a=100000000000000
     for q in range(len(Value)):
         Value[q]=[q,a*Value[q]+Maximum_times[q]]
     return Value
@@ -104,7 +115,7 @@ Reichstag.location='Platz der Republik 1, 11011 Berlin, Germany'
 #hardcoding c function---------------------------------------------------------------------------------------------
 Brandenburger_Tor.c=c2
 Mustafas_Gemuese_Kebab.c=c
-Reichstag.c=c
+Reichstag.c=c3
 
 #hardcoding average time spent at each site------------------------------------------------------------------------
 #time in seconds
