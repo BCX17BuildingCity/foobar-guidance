@@ -1,0 +1,11 @@
+Reichstag:Reichstag:Platz der Republik 1, 11011 Berlin, Germany:1200:c1
+Mustafas_Gemuese_Kebab:Mustafas Gemuese Kebab:Mehringdamm 32, 10962 Berlin, Germany:2400:c2
+Alexanderplatz:Alexanderplatz:Alexanderplatz, 10178 Berlin, Germany:5400:c
+Brandenburger_Tor:Brandenburger Tor:Praiser Platz, 10117 Berlin, Germany:2040:c1
+Siegessäule:Siegessäule:Großer Stern, 10557 Berlin, Germany:5400:c2
+Klunkerkranich:Klunkerkranich:Neukölln Arcaden, Karl-Marx-Straße 66, 12043 Berlin, Germany:7200:c
+Tante_Dampf:Tante Dampf:Schönleinstraße 20, 10967 Berlin, Germany:1200:c2
+Hackische_Höfe:Hackische Höfe:Rosenthaler Str. 40-41, 10178 Berlin, Germany:2700:c1
+Kaffe_am_neuen_See:Kaffe am neuen See:Lichtensteinallee 2, 10787 Berlin, Germany:7200:c1
+Gedächtniss_Kirche:Gedächtniss Kirche:Breitscheidplatz, 10789 Berlin, Germany:1500:c2
+Checkpointcharlie:Checkpointcharlie:Breitscheidplatz, 10789 Berlin, Germany:5400:c

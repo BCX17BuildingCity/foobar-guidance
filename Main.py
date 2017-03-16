@@ -5,6 +5,7 @@ from datetime import datetime
 import time
 import itertools
 from math import cos,pi
+import sys
 #classes----------------------------------------------------------------------------------------------------------
 
 class Site(object):
@@ -25,6 +26,42 @@ gmaps = googlemaps.Client(key='AIzaSyClDVamLeWK9jlFPRyTYBFnJ36lzjyp01o')
 Path=[]
 
 #functions--------------------------------------------------------------------------------------------------------
+def Startup():
+    Me=Person()
+    y=(sys.argv[1:])        #UID,Geolocation
+    x=[]
+    for i in y:
+        x.append(i.replace('-',''))
+    print(x)
+    Me.location=x[1]
+    Wish=Loader(True,x[0])
+    Me.Wishlist=[]
+    for i in Wish:
+        n=Loader(0,i)
+        print('n: ',n)
+        exec(n[0] + " =Site()")
+        exec(n[0]+'.name=n[1]')
+        exec(n[0]+'.location=n[2]')
+        exec(n[0]+".average_time=int(n[3])")
+        exec(n[0]+'.c='+n[4])
+        exec('Me.Wishlist.append('+n[0]+')')
+    return Me
+def Loader(U,name):
+    if U==True:
+        print('looking for',name)
+        with open('Data.txt', 'r') as inF:
+            for line in inF:
+                print(line)
+                if name in line:
+                    print('Found User')
+                    return line.split(':')[2:-1]
+    else:
+        with open('Sites.txt', 'r') as inF:
+            for line in inF:
+                if name in line:
+                    return str(line).split(':')
+
+
 
 def Travel_time(From, To):
     directions_result = gmaps.directions(From, To, mode="transit", departure_time=now)
@@ -47,7 +84,7 @@ def c(x):
         return -4*(x-22)/18
     else:
         return 10000000
-def c3(x):
+def c1(x):
         if 7<=x and x<16:
             return 3*(x-7)/18
         if 16<=x and x<=22:
@@ -97,36 +134,14 @@ def value(Master,times):
     return Value
 
 #Sites for now hard coded------------------------------------------------------------------------------------------
-Me=Person()
-Brandenburger_Tor=Site()
-Reichstag=Site()
-Mustafas_Gemuese_Kebab=Site()
-Me.Wishlist=[Reichstag, Mustafas_Gemuese_Kebab, Brandenburger_Tor]
-#hardcoding names--------------------------------------------------------------------------------------------------
-Brandenburger_Tor.name='Brandenburger_Tor'
-Mustafas_Gemuese_Kebab.name='Mustafas_Gemuese_Kebab'
-Reichstag.name='Reichstag'
-#hardcoding addresses----------------------------------------------------------------------------------------------
-Me.location='Europaplatz 1, 10557 Berlin, Germany'
-Brandenburger_Tor.location='Praiser Platz, 10117 Berlin, Germany'
-Mustafas_Gemuese_Kebab.location='Mehringdamm 32, 10962 Berlin, Germany'
-Reichstag.location='Platz der Republik 1, 11011 Berlin, Germany'
+Me=Startup()
 
-#hardcoding c function---------------------------------------------------------------------------------------------
-Brandenburger_Tor.c=c2
-Mustafas_Gemuese_Kebab.c=c
-Reichstag.c=c3
-
-#hardcoding average time spent at each site------------------------------------------------------------------------
-#time in seconds
-Brandenburger_Tor.average_time=380
-Mustafas_Gemuese_Kebab.average_time=2400
-Reichstag.average_time=3600
 #routine-----------------------------------------------------------------------------------------------------------
 Master=list(itertools.permutations(Me.Wishlist))                       #Master is a touple consisting of all possible permutations of the different destinations on the wishlist
 for i in range(len(Master)):
     Master[i]=list(Master[i])                                       #formatting Master
     Names=[]
+    print(Master)
     for n in Master[i]:
         Names.append(n.name)
     Master[i].insert(0,Me)
